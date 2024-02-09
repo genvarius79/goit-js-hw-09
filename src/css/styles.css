@@ -98,17 +98,3 @@ button {
 button:hover {
   background: #6c8cff;
 }
-.sl-overlay {
-  background: rgba(46, 47, 66, 0.8);
-}
-.sl-wrapper .sl-close {
-  font-family: 'Montserrat', sans-serif;
-  color: #ffffff;
-}
-.sl-wrapper .sl-counter {
-  color: #ffffff;
-}
-.sl-wrapper .sl-navigation button {
-  font-family: 'Montserrat', sans-serif;
-  color: #ffffff;
-}
