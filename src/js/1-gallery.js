@@ -67,14 +67,11 @@ const images = [
     description: 'Lighthouse Coast Sea',
   },
 ];
-let instance; // Глобальна змінна екземпляру класу бібліотеки basicLightbox
-let isShowed = false; // Глобальна змінна що фіксує коли модальне вікно відкрите, або закрите
-
 const galleryEl = document.querySelector('.gallery'); // отримання посилання на ul.gallery
 
 // функція створення розмітки для подальшого відображення елементів на сторінці
-function createMarcup({ preview, original, description }) {
-  const marcup = `<li class="gallery-item">
+function createMarkup({ preview, original, description }) {
+  const markup = `<li class="gallery-item">
                     <a class="gallery-link" href="${original}">
                       <img
                         class="gallery-image"
@@ -83,17 +80,32 @@ function createMarcup({ preview, original, description }) {
                       />
                     </a>
                   </li>`;
-  return marcup;
+  return markup;
 }
-let marcupAll = ''; // Глобальна змінна для збереження повної розмітки
+let markupAll = ''; // Глобальна змінна для збереження повної розмітки
 
 for (let image of images) {
-  marcupAll += createMarcup(image); //в циклі створюємо повну розмітку
+  markupAll += createMarkup(image); //в циклі створюємо повну розмітку
 }
-galleryEl.innerHTML = marcupAll; //вставляємо готову розмітку
+galleryEl.innerHTML = markupAll; //вставляємо готову розмітку
 
 const lightbox = new SimpleLightbox('.gallery-link', {
   captionsData: 'alt',
   captionDelay: 250,
   captionPosition: 'bottom',
+});
+
+lightbox.on('shown.simplelightbox', () => {
+  const overlay = document.querySelector('.sl-wrapper');
+  const counter = document.querySelector('.sl-counter');
+  const buttonClose = document.querySelector('.sl-close');
+  const arrowNavigation = document.querySelectorAll(
+    '.sl-wrapper .sl-navigation button'
+  );
+  overlay.style.backgroundColor = 'rgba(46, 47, 66, 0.8)';
+  counter.style.color = '#fff';
+  counter.style.fontFamily = 'Montserrat';
+  counter.style.top = '16px';
+  buttonClose.style.color = '#fff';
+  arrowNavigation.forEach(item => (item.style.color = '#fff'));
 });
